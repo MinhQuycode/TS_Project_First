@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Form from "./components/Form";
+import List from "./components/List";
+import "./App.css";
 
-function App() {
+export interface People {
+  userList: {
+    name: string;
+    age: number;
+    bio: string;
+  }[];
+}
+
+export default function App() {
+  const [listPeople, setListPeople] = useState<People["userList"]>([
+    { name: "Quy Pham", age: 20, bio: "Developer" },
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Form people={listPeople} setListPeople={setListPeople} />
+      <List user={listPeople} />
     </div>
   );
 }
-
-export default App;
